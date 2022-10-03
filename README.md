@@ -1,2 +1,2 @@
 # pyshell
-cmd put simpler and in python
+cmd but simpler and in python
