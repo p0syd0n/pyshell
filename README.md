@@ -13,4 +13,5 @@ syntax is
 ```
 command/argument1//argument2///argument3////
 ```
-I have only added 1 argument and 2 commmands so far.
+I have only added 1 argument and 2 commands so far.
+You need to have selenium installed for selenium to work.
