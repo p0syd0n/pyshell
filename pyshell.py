@@ -60,15 +60,15 @@ def help():
     text(
         f'''
             Syntax:
-            command{SEPARATOR}argument1{SEPARATOR}{SEPARATOR}
+            command{SEPARATOR}argument1{SEPARATOR}{SEPARATOR}argument2{SEPARATOR}{SEPARATOR}{SEPARATOR}
 
-            (more arguments to be added shortly)
+            (not all commands need 2 arguments)
 
 
             Command Directory:
-            slm{SEPARATOR}site{SEPARATOR}{SEPARATOR}.....opens a selenium page where 'site' is the url
+            slm{SEPARATOR}site{SEPARATOR}{SEPARATOR}.................opens a selenium page where 'site' is the url
             file{SEPARATOR}file-to-open{SEPARATOR}{SEPARATOR}........opens a file where 'file-to-open' is the file you want opened
-            help{SEPARATOR}......................opens this directory
+            help{SEPARATOR}..........................................opens this directory
 
 
             Shortcuts:
@@ -114,16 +114,16 @@ def start_selenium(argument1):
     print('reached new thread')
     threading.Thread(target=selenium(argument1)).start()
 
-def start_selenium_1():
-    threading.Thread(target=selenium_1).start()
+def start_selenium_1(argument2):
+    threading.Thread(target=selenium_1(argument2)).start()
 
-def start_selenium_2():
-     threading.Thread(target=selenium_2).start()
+def start_selenium_2(argument2):
+     threading.Thread(target=selenium_2(argument2)).start()
 
-def start_selenium_3():
-     threading.Thread(target=selenium_3).start()
+def start_selenium_3(argument2):
+     threading.Thread(target=selenium_3(argument2)).start()
 
-def selenium_1(argument1):
+def selenium_1(argument2):
 
  
     
@@ -132,7 +132,7 @@ def selenium_1(argument1):
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_extension('extension_1_7_1_0.crx')
     driver = webdriver.Chrome(options=chrome_options)
-    driver.get(content)
+    driver.get(argument2)
     sleep(4165200)
 
 def warn_selenium():
@@ -151,7 +151,7 @@ def selenium_2(argument2):
         driver.get(f'https://www.google.com/search?q={argument2}&source=hp&ei=l_U9Y-2hD-6e5NoP-vGluA0&iflsig=AJiK0e8AAAAAYz4DpxNZoLvh3UggMip95rBGus7DjB7q&ved=0ahUKEwityazlgsr6AhVuD1kFHfp4CdcQ4dUDCAk&uact=5&oq=test&gs_lp=Egdnd3Mtd2l6uAED-AEBGgIYAzILEAAYgAQYsQMYgwEyCxAAGIAEGLEDGIMBMgUQABiABDILEAAYgAQYsQMYgwEyCxAAGIAEGLEDGIMBMgsQABiABBixAxiDATILEAAYgAQYsQMYgwEyCxAAGIAEGLEDGIMBMhcQLhiABBixAxiDARjUAhiLAxioAxiYAzIOEAAYgAQYsQMYgwEYiwPCAgsQLhiABBixAxiDAcICERAuGIAEGLEDGIMBGMcBGNEDwgIIEC4YsQMYgwHCAg4QLhiABBixAxjHARjRA8ICERAuGIAEGLEDGMcBGNEDGNQCwgIOEC4YgAQYsQMYgwEYiwPCAhQQLhixAxiDARjUAhiLAxijAxioA8ICDhAuGLEDGIMBGNQCGIsDwgIXEC4YsQMYgwEYiwMYmgMYqAMYmwMYmAPCAggQLhiABBixA0i_ClAAWIQGcAB4AMgBAJABAJgBR6ABggKqAQE0&sclient=gws-wiz')
         sleep(4165200)
 
-def selenium_3():
+def selenium_3(argument2):
     chrome_options = Options()
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
