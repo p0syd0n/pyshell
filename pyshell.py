@@ -91,8 +91,7 @@ def text(text, type):
 def selenium(argument1):
     try:
         print("initiating Selenium")
-        print("[!] Warning! Shell may become unresponsive after initiating Selenium")
-        text("\n$>>[!] Warning! Shell may become unresponsive after initiating Selenium", 'warning')
+
         chrome_options = Options()
         chrome_options.add_experimental_option("detach", True)
         driver = webdriver.Chrome(options=chrome_options)
@@ -110,18 +109,27 @@ def selenium(argument1):
         except:
             text("Error unresolved", 'warning')
             shell.insert(tk.END, f"\n@>>")
+
 def start_selenium(argument1):
     print('reached new thread')
+    text("[!] Warning! Shell may become unresponsive after initiating Selenium", 'warning')
     threading.Thread(target=selenium(argument1)).start()
 
+
 def start_selenium_1(argument2):
+    print('reached new thread')
+    text("[!] Warning! Shell may become unresponsive after initiating Selenium", 'warning')
     threading.Thread(target=selenium_1(argument2)).start()
 
 def start_selenium_2(argument2):
-     threading.Thread(target=selenium_2(argument2)).start()
+    print('reached new thread')
+    text("[!] Warning! Shell may become unresponsive after initiating Selenium", 'warning')
+    threading.Thread(target=selenium_2(argument2)).start()
 
 def start_selenium_3(argument2):
-     threading.Thread(target=selenium_3(argument2)).start()
+    text("Reached thread", 'warning')
+    text("[!] Warning! Shell may become unresponsive after initiating Selenium", 'warning')
+    threading.Thread(target=selenium_3(argument2)).start()
 
 def selenium_1(argument2):
 
@@ -131,9 +139,10 @@ def selenium_1(argument2):
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_extension('extension_1_7_1_0.crx')
+    chrome_options.add_experimental_option("detach", True)
     driver = webdriver.Chrome(options=chrome_options)
     driver.get(argument2)
-    sleep(4165200)
+    
 
 def warn_selenium():
     text("[!] Warning! Shell may become unresponsive after initiating Selenium", 'warning')
@@ -145,23 +154,27 @@ def selenium_2(argument2):
         chrome_options = Options()
         chrome_options.add_argument("--incognito")
         driver = webdriver.Chrome(options=chrome_options)
+        chrome_options.add_experimental_option("detach", True)
         driver.get(argument2)
-        sleep(4165200)
+        
     except:
-        driver.get(f'https://www.google.com/search?q={argument2}&source=hp&ei=l_U9Y-2hD-6e5NoP-vGluA0&iflsig=AJiK0e8AAAAAYz4DpxNZoLvh3UggMip95rBGus7DjB7q&ved=0ahUKEwityazlgsr6AhVuD1kFHfp4CdcQ4dUDCAk&uact=5&oq=test&gs_lp=Egdnd3Mtd2l6uAED-AEBGgIYAzILEAAYgAQYsQMYgwEyCxAAGIAEGLEDGIMBMgUQABiABDILEAAYgAQYsQMYgwEyCxAAGIAEGLEDGIMBMgsQABiABBixAxiDATILEAAYgAQYsQMYgwEyCxAAGIAEGLEDGIMBMhcQLhiABBixAxiDARjUAhiLAxioAxiYAzIOEAAYgAQYsQMYgwEYiwPCAgsQLhiABBixAxiDAcICERAuGIAEGLEDGIMBGMcBGNEDwgIIEC4YsQMYgwHCAg4QLhiABBixAxjHARjRA8ICERAuGIAEGLEDGMcBGNEDGNQCwgIOEC4YgAQYsQMYgwEYiwPCAhQQLhixAxiDARjUAhiLAxijAxioA8ICDhAuGLEDGIMBGNQCGIsDwgIXEC4YsQMYgwEYiwMYmgMYqAMYmwMYmAPCAggQLhiABBixA0i_ClAAWIQGcAB4AMgBAJABAJgBR6ABggKqAQE0&sclient=gws-wiz')
-        sleep(4165200)
+        driver.get(f'https://www.google.com/search?q={argument2}&source=hp&ei=zjg_Y9pBpqvk2g-FhorgDg&iflsig=AJiK0e8AAAAAYz9G3qutdeqr7By_peYazdQtVoi2XQIP&ved=0ahUKEwja4JWEt8z6AhWmFVkFHQWDAuwQ4dUDCAk&uact=5&oq=test&gs_lcp=Cgdnd3Mtd2l6EAMyCwgAEIAEELEDEIMBMgsIABCABBCxAxCDATIFCAAQgAQyCwgAEIAEELEDEIMBMggIABCABBCxAzILCAAQgAQQsQMQgwEyCwgAEIAEELEDEIMBMgsIABCABBCxAxCDATILCAAQgAQQsQMQgwEyCwguEIAEELEDENQCOgsILhCABBCxAxCDAToRCC4QgAQQsQMQgwEQxwEQ0QM6BQguEIAEOggILhCxAxCDAToOCC4QgAQQsQMQxwEQ0QM6EQguEIAEELEDEMcBENEDENQCOgsILhCxAxCDARDUAjoICC4QgAQQsQNQAFjQAmC6CGgAcAB4AIABUogBngKSAQE0mAEAoAEB&sclient=gws-wiz')
+        
 
 def selenium_3(argument2):
     chrome_options = Options()
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_extension('extension_1_7_1_0.crx')
+    chrome_options.add_experimental_option("detach", True)
     chrome_options.add_argument("--incognito")
     driver = webdriver.Chrome(options=chrome_options)
     driver.get(argument2)
-    sleep(4165200)
+    
 
 def sort_commands():
+    tkm.showwarning('WARNING', 'I am IN THE PROCESS of building this part of pyshell-program may crash unexpectedly')
+    global line
     if command == "file":
         print("sorted")
         run_file(argument1)
@@ -179,14 +192,14 @@ def sort_commands():
     elif command == "s":
         
         if argument1 == "1":
-            selenium_1(default)
+            start_selenium_1(default)
         else:
-            pass
+            text('[!] Error- Argument not recognized', 'error')
 
 
 ###############
     elif command == "sl":
-        warn_selenium()
+        
         try:
             if argument1 == "1":
                 print(f'argument2: {argument2}')
@@ -205,14 +218,15 @@ def sort_commands():
 
             else:
                 sleep(1)
-                text("[!] Error: argument1 not recognised", "error")
+                shell.insert(tk.END, "\n[!] Error: argument1 not recognised", "error")
+                line+=1
 
 
         except Exception as e:
             shell.insert(tk.END, '\n')
             text(f'{e}', 'error')
     else:
-        text('[!] Error: Command not recognized')
+        text('[!] Error: Command not recognized', 'error')
     
 
 
@@ -235,12 +249,17 @@ def extract(window):
     global extracted, line, command, argument1, argument2
     
     extracted=shell.get(f'{line}.2', tk.END)
-
-    sub1 = ">"
-    sub2 = f"{SEPARATOR}"
-    idx1 = extracted.index(sub1)
-    idx2 = extracted.index(sub2)
-    command = extracted[idx1 + len(sub1) + 0: idx2]
+    try:
+        sub1 = ">"
+        sub2 = f"{SEPARATOR}"
+        idx1 = extracted.index(sub1)
+        idx2 = extracted.index(sub2)
+        command = extracted[idx1 + len(sub1) + 0: idx2]
+    except:
+        text('[!] Error: Command not recognized', 'error')
+        shell.insert(tk.END, f"\n@>>")
+        line=line+1
+        
     
     try:
         sub3 = F"{SEPARATOR}{SEPARATOR}"
@@ -253,7 +272,7 @@ def extract(window):
 
     try:
         sub4 = F"{SEPARATOR}{SEPARATOR}{SEPARATOR}"
-        idx4 = extracted.index(sub3)
+        idx4 = extracted.index(sub4)
         argument2 = extracted[idx3 + len(sub1) + 0: idx4]
     except:
         pass
