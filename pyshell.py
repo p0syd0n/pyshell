@@ -7,11 +7,11 @@ from time import sleep
 from selenium.webdriver.chrome.options import Options
 import keyboard
 from selenium.webdriver.common.action_chains import ActionChains
-
-ERROR_TEXT_COLOR='yellow'
+import threading
+ERROR_TEXT_COLOR='red'
 ERROR_HIGHLIGHT_COLOR='blue'
 SEPARATOR="/"
-WARNING_TEXT_COLOR='red'
+WARNING_TEXT_COLOR='orange'
 WARNING_HIGHLIGHT_COLOR='blue'
 
 SHELL_TEXT_COLOR='white'
@@ -86,14 +86,18 @@ def text(text, type):
     global line
     shell.insert(tk.END, f"$>>{text}", type)
     line=line+1
+    
 
 def selenium(argument1):
     try:
+        print("initiating Selenium")
         print("[!] Warning! Shell may become unresponsive after initiating Selenium")
         text("\n$>>[!] Warning! Shell may become unresponsive after initiating Selenium", 'warning')
-        driver = webdriver.Chrome()
-        driver.get(argument1)
-        sleep(4165200)
+        chrome_options = Options()
+        chrome_options.add_experimental_option("detach", True)
+        driver = webdriver.Chrome(options=chrome_options)
+        driver.get(default)
+        
         
 
     except Exception as e:
@@ -106,36 +110,55 @@ def selenium(argument1):
         except:
             text("Error unresolved", 'warning')
             shell.insert(tk.END, f"\n@>>")
+def start_selenium(argument1):
+    print('reached new thread')
+    threading.Thread(target=selenium(argument1)).start()
 
+def start_selenium_1():
+    threading.Thread(target=selenium_1).start()
 
-def selenium1(default):
+def start_selenium_2():
+     threading.Thread(target=selenium_2).start()
+
+def start_selenium_3():
+     threading.Thread(target=selenium_3).start()
+
+def selenium_1(argument1):
+
+ 
+    
     chrome_options = Options()
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_extension('extension_1_7_1_0.crx')
     driver = webdriver.Chrome(options=chrome_options)
-    driver.get(default)
-    # action = ActionChains(driver)
-    # action.send_keys(Keys.CONTROL,”t”)
-
-
+    driver.get(content)
     sleep(4165200)
 
-def selenium2():
-    chrome_options = Options()
-    chrome_options.add_argument("--incognito")
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.get(argument1)
-    sleep(4165200)
+def warn_selenium():
+    text("[!] Warning! Shell may become unresponsive after initiating Selenium", 'warning')
+    
+    
 
-def selenium3():
+def selenium_2(argument2):
+    try:
+        chrome_options = Options()
+        chrome_options.add_argument("--incognito")
+        driver = webdriver.Chrome(options=chrome_options)
+        driver.get(argument2)
+        sleep(4165200)
+    except:
+        driver.get(f'https://www.google.com/search?q={argument2}&source=hp&ei=l_U9Y-2hD-6e5NoP-vGluA0&iflsig=AJiK0e8AAAAAYz4DpxNZoLvh3UggMip95rBGus7DjB7q&ved=0ahUKEwityazlgsr6AhVuD1kFHfp4CdcQ4dUDCAk&uact=5&oq=test&gs_lp=Egdnd3Mtd2l6uAED-AEBGgIYAzILEAAYgAQYsQMYgwEyCxAAGIAEGLEDGIMBMgUQABiABDILEAAYgAQYsQMYgwEyCxAAGIAEGLEDGIMBMgsQABiABBixAxiDATILEAAYgAQYsQMYgwEyCxAAGIAEGLEDGIMBMhcQLhiABBixAxiDARjUAhiLAxioAxiYAzIOEAAYgAQYsQMYgwEYiwPCAgsQLhiABBixAxiDAcICERAuGIAEGLEDGIMBGMcBGNEDwgIIEC4YsQMYgwHCAg4QLhiABBixAxjHARjRA8ICERAuGIAEGLEDGMcBGNEDGNQCwgIOEC4YgAQYsQMYgwEYiwPCAhQQLhixAxiDARjUAhiLAxijAxioA8ICDhAuGLEDGIMBGNQCGIsDwgIXEC4YsQMYgwEYiwMYmgMYqAMYmwMYmAPCAggQLhiABBixA0i_ClAAWIQGcAB4AMgBAJABAJgBR6ABggKqAQE0&sclient=gws-wiz')
+        sleep(4165200)
+
+def selenium_3():
     chrome_options = Options()
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_extension('extension_1_7_1_0.crx')
     chrome_options.add_argument("--incognito")
     driver = webdriver.Chrome(options=chrome_options)
-    driver.get(argument1)
+    driver.get(argument2)
     sleep(4165200)
 
 def sort_commands():
@@ -144,9 +167,9 @@ def sort_commands():
         run_file(argument1)
 
     elif command == "slm":
-        selenium(argument1) 
+        start_selenium(argument1) 
 
-    if command == "help":
+    elif command == "help":
         help()
     
     elif command == "c":
@@ -156,29 +179,43 @@ def sort_commands():
     elif command == "s":
         
         if argument1 == "1":
-            selenium1(default)
+            selenium_1(default)
         else:
             pass
 
 
 ###############
     elif command == "sl":
+        warn_selenium()
         try:
-            if argument2 == "1":
-                selenium1(argument1)
+            if argument1 == "1":
+                print(f'argument2: {argument2}')
+                print("selenium1")
+                start_selenium_1(argument2)
 
-            if argument2 == "2":
-                selenium2(argument1)
+            if argument1 == "2":
+                print(f'argument2: {argument2}')
+                print("selenium2")
+                start_selenium_2(argument2)
 
-            if argument2 == "3":
-                selenium3(argument1)
+            if argument1 == "3":
+                print(f'argument2: {argument2}')
+                print("selenium3")
+                start_selenium_3(argument2)
 
             else:
                 sleep(1)
-                text("argument2 not recognised", "warning")
-                selenium(argument1)
-        except:
-            text("argument2 not found", "error")
+                text("[!] Error: argument1 not recognised", "error")
+
+
+        except Exception as e:
+            shell.insert(tk.END, '\n')
+            text(f'{e}', 'error')
+    else:
+        text('[!] Error: Command not recognized')
+    
+
+
         
 
     
@@ -189,6 +226,7 @@ def run_file(argument1):
 
 
 def chrome():
+    text('chrome opened', 'none')
     os.system(f"start chrome.exe")
 
 
