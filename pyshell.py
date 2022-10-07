@@ -8,23 +8,27 @@ from selenium.webdriver.chrome.options import Options
 import keyboard
 from selenium.webdriver.common.action_chains import ActionChains
 import threading
+from datetime import datetime, date
 ERROR_TEXT_COLOR='red'
 ERROR_HIGHLIGHT_COLOR='black'
-SEPARATOR="/"
+SEPARATOR="."
 WARNING_TEXT_COLOR='yellow'
 WARNING_HIGHLIGHT_COLOR='black'
 
 SHELL_TEXT_COLOR='white'
 SHELL_BACKGROUND_COLOR='black'
 
+CURSOR_COLOR='white'
+
 window=tk.Tk()
 window.geometry("900x500")
 window.title("pyshell")
 window.config(bg=SHELL_BACKGROUND_COLOR)
 line=1
-shell=tk.Text(window, bg=SHELL_BACKGROUND_COLOR, fg=SHELL_TEXT_COLOR, width='500', height="900", font='TkFixedFont')
+shell=tk.Text(window, bg=SHELL_BACKGROUND_COLOR, fg=SHELL_TEXT_COLOR, width='500', height="900", font='TkFixedFont', blockcursor=True)
 shell.place(x=0, y=0)
 shell.insert(tk.END, f"@>>")
+shell.config(insertbackground=CURSOR_COLOR)
 shell.focus()
 scrollbar=tk.Scrollbar(window, orient='vertical')
 scrollbar.pack(side=tk.RIGHT, fill='y')
@@ -112,24 +116,63 @@ def selenium(argument1):
 
 def start_selenium(argument1):
     print('reached new thread')
-    text("[!] Warning! Shell may become unresponsive for a few seconds after initiating Selenium", 'warning')
-    threading.Thread(target=selenium(argument1)).start()
+    try:
+        text("Threading started", 'none')
+        text("\n[!] Warning! Shell may become unresponsive for a few seconds after initiating Selenium", 'warning')
+        threading.Thread(target=selenium(argument1)).start()
+    except Exception as e:
+        text("[!] Error! Error during threading", 'error')
 
 
 def start_selenium_1(argument2):
     print('reached new thread')
-    text("[!] Warning! Shell may become unresponsive for a few seconds after initiating Selenium", 'warning')
-    threading.Thread(target=selenium_1(argument2)).start()
+    try:
+        text("Threading started", 'none')
+        text("\n[!] Warning! Shell may become unresponsive for a few seconds after initiating Selenium", 'warning')
+        threading.Thread(target=seleium_1(argument2)).start()
+    except Exception as e:
+        shell.insert(tk.END, "\n$>>[!] Error: Error during threading, written to error log", 'error')
+        today = date.today()
+        now = datetime.now()
+        timm = now.strftime("%H:%M:%S")
+        datt = today.strftime("%b-%d-%Y")
+        f = open("error_log.txt", "a")
+        f.write(f'\n\n-------------------{datt} {timm}-------------------------\n {e}')
+        f.close()
 
 def start_selenium_2(argument2):
     print('reached new thread')
-    text("[!] Warning! Shell may become unresponsive for a few seconds after initiating Selenium", 'warning')
-    threading.Thread(target=selenium_2(argument2)).start()
+    try:
+        text("Threading started", 'none')
+        text("\n[!] Warning! Shell may become unresponsive for a few seconds after initiating Selenium", 'warning')
+        threading.Thread(target=selenium_2(argument2)).start()
+    except Exception as e:
+        text("\n[!] Error! Error during threading, written to error log", 'error')
+        today = date.today()
+        now = datetime.now()
+        timm = now.strftime("%H:%M:%S")
+        datt = today.strftime("%b-%d-%Y")
+        f = open("error_log.txt", "a")
+        f.write(f'\n\n-------------------{datt} {timm}-------------------------\n {e}')
+        f.close()
+
 
 def start_selenium_3(argument2):
-    text("Reached thread", 'warning')
-    text("[!] Warning! Shell may become unresponsive for a few seconds after initiating Selenium", 'warning')
-    threading.Thread(target=selenium_3(argument2)).start()
+    print('reached new thread')
+    try:
+        text("Threading started", 'none')
+        text("\n[!] Warning! Shell may become unresponsive for a few seconds after initiating Selenium", 'warning')
+        threading.Thread(target=selenium_3(argument2)).start()
+    except Exception as e:
+        text("\n[!] Error! Error during threading, written to error log", 'error')
+        today = date.today()
+        now = datetime.now()
+        timm = now.strftime("%H:%M:%S")
+        datt = today.strftime("%b-%d-%Y")
+        f = open("error_log.txt", "a")
+        f.write(f'\n\n-------------------{datt} {timm}-------------------------\n {e}')
+        f.close()
+
 
 def selenium_1(argument2):
 
@@ -157,6 +200,8 @@ def selenium_2(argument2):
         driver = webdriver.Chrome(options=chrome_options)
         chrome_options.add_experimental_option("detach", True)
         driver.get(argument2)
+        
+        
         
     except:
         driver.get(f'https://www.google.com/search?q={argument2}&source=hp&ei=zjg_Y9pBpqvk2g-FhorgDg&iflsig=AJiK0e8AAAAAYz9G3qutdeqr7By_peYazdQtVoi2XQIP&ved=0ahUKEwja4JWEt8z6AhWmFVkFHQWDAuwQ4dUDCAk&uact=5&oq=test&gs_lcp=Cgdnd3Mtd2l6EAMyCwgAEIAEELEDEIMBMgsIABCABBCxAxCDATIFCAAQgAQyCwgAEIAEELEDEIMBMggIABCABBCxAzILCAAQgAQQsQMQgwEyCwgAEIAEELEDEIMBMgsIABCABBCxAxCDATILCAAQgAQQsQMQgwEyCwguEIAEELEDENQCOgsILhCABBCxAxCDAToRCC4QgAQQsQMQgwEQxwEQ0QM6BQguEIAEOggILhCxAxCDAToOCC4QgAQQsQMQxwEQ0QM6EQguEIAEELEDEMcBENEDENQCOgsILhCxAxCDARDUAjoICC4QgAQQsQNQAFjQAmC6CGgAcAB4AIABUogBngKSAQE0mAEAoAEB&sclient=gws-wiz')
