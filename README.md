@@ -16,4 +16,3 @@ command/argument1//argument2///
 
 You need to have selenium installed for selenium to work.
 
-I am working on some keyboard shortcuts.
