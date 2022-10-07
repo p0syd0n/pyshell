@@ -9,13 +9,13 @@ import keyboard
 from selenium.webdriver.common.action_chains import ActionChains
 import threading
 ERROR_TEXT_COLOR='red'
-ERROR_HIGHLIGHT_COLOR='blue'
+ERROR_HIGHLIGHT_COLOR='black'
 SEPARATOR="/"
-WARNING_TEXT_COLOR='orange'
-WARNING_HIGHLIGHT_COLOR='blue'
+WARNING_TEXT_COLOR='yellow'
+WARNING_HIGHLIGHT_COLOR='black'
 
 SHELL_TEXT_COLOR='white'
-SHELL_BACKGROUND_COLOR='blue'
+SHELL_BACKGROUND_COLOR='black'
 
 window=tk.Tk()
 window.geometry("900x500")
@@ -112,37 +112,38 @@ def selenium(argument1):
 
 def start_selenium(argument1):
     print('reached new thread')
-    text("[!] Warning! Shell may become unresponsive after initiating Selenium", 'warning')
+    text("[!] Warning! Shell may become unresponsive for a few seconds after initiating Selenium", 'warning')
     threading.Thread(target=selenium(argument1)).start()
 
 
 def start_selenium_1(argument2):
     print('reached new thread')
-    text("[!] Warning! Shell may become unresponsive after initiating Selenium", 'warning')
+    text("[!] Warning! Shell may become unresponsive for a few seconds after initiating Selenium", 'warning')
     threading.Thread(target=selenium_1(argument2)).start()
 
 def start_selenium_2(argument2):
     print('reached new thread')
-    text("[!] Warning! Shell may become unresponsive after initiating Selenium", 'warning')
+    text("[!] Warning! Shell may become unresponsive for a few seconds after initiating Selenium", 'warning')
     threading.Thread(target=selenium_2(argument2)).start()
 
 def start_selenium_3(argument2):
     text("Reached thread", 'warning')
-    text("[!] Warning! Shell may become unresponsive after initiating Selenium", 'warning')
+    text("[!] Warning! Shell may become unresponsive for a few seconds after initiating Selenium", 'warning')
     threading.Thread(target=selenium_3(argument2)).start()
 
 def selenium_1(argument2):
 
  
-    
-    chrome_options = Options()
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    chrome_options.add_extension('extension_1_7_1_0.crx')
-    chrome_options.add_experimental_option("detach", True)
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.get(argument2)
-    
+    try:
+        chrome_options = Options()
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        chrome_options.add_extension('extension_1_7_1_0.crx')
+        chrome_options.add_experimental_option("detach", True)
+        driver = webdriver.Chrome(options=chrome_options)
+        driver.get(argument2)
+    except:
+        driver.get(f'https://www.google.com/search?q={argument2}&source=hp&ei=zjg_Y9pBpqvk2g-FhorgDg&iflsig=AJiK0e8AAAAAYz9G3qutdeqr7By_peYazdQtVoi2XQIP&ved=0ahUKEwja4JWEt8z6AhWmFVkFHQWDAuwQ4dUDCAk&uact=5&oq=test&gs_lcp=Cgdnd3Mtd2l6EAMyCwgAEIAEELEDEIMBMgsIABCABBCxAxCDATIFCAAQgAQyCwgAEIAEELEDEIMBMggIABCABBCxAzILCAAQgAQQsQMQgwEyCwgAEIAEELEDEIMBMgsIABCABBCxAxCDATILCAAQgAQQsQMQgwEyCwguEIAEELEDENQCOgsILhCABBCxAxCDAToRCC4QgAQQsQMQgwEQxwEQ0QM6BQguEIAEOggILhCxAxCDAToOCC4QgAQQsQMQxwEQ0QM6EQguEIAEELEDEMcBENEDENQCOgsILhCxAxCDARDUAjoICC4QgAQQsQNQAFjQAmC6CGgAcAB4AIABUogBngKSAQE0mAEAoAEB&sclient=gws-wiz')    
 
 def warn_selenium():
     text("[!] Warning! Shell may become unresponsive after initiating Selenium", 'warning')
@@ -262,7 +263,7 @@ def extract(window):
         
     
     try:
-        sub3 = F"{SEPARATOR}{SEPARATOR}"
+        sub3 = f"{SEPARATOR}{SEPARATOR}"
         idx3 = extracted.index(sub3)
         argument1 = extracted[idx2 + len(sub1) + 0: idx3]
 
@@ -271,9 +272,9 @@ def extract(window):
         pass
 
     try:
-        sub4 = F"{SEPARATOR}{SEPARATOR}{SEPARATOR}"
+        sub4 = f"{SEPARATOR}{SEPARATOR}{SEPARATOR}"
         idx4 = extracted.index(sub4)
-        argument2 = extracted[idx3 + len(sub1) + 0: idx4]
+        argument2 = extracted[idx3 + len(sub1) + 1: idx4]
     except:
         pass
 
