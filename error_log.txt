@@ -1,0 +1,10 @@
+
+
+-------------------Oct-08-2022 17:25:42-------------------------
+ local variable 'line' referenced before assignment
+
+-------------------Oct-08-2022 17:25:48-------------------------
+ local variable 'line' referenced before assignment
+
+-------------------Oct-08-2022 18:01:13-------------------------
+ local variable 'line' referenced before assignment
